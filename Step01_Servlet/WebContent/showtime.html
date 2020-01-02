@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1 class="time"></h1>
+<script>
+const time=document.querySelector(".time");
+
+function init(){
+    const date=new Date();
+    const hour=date.getHours();
+    const min=date.getMinutes();
+    const sec=date.getSeconds();
+    time.innerText=`${hour} : ${min} : ${sec}`;
+}
+
+setInterval(init, 1000);
+</script>
+</body>
+</html>
