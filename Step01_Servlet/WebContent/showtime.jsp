@@ -11,6 +11,7 @@
 <%
 	Date d=new Date();
 	String info=d.toString();
+	
 %>
 <p>현재 시간 : <strong><%=info %></strong></p>
 </body>
