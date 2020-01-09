@@ -24,6 +24,10 @@
 <meta charset="UTF-8">
 <title>/todo/updateform.jsp</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bootstrap.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/step03_custom.css" />
+<!-- jquery + bootstrap javascript 로딩 -->
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.3.1.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/bootstrap.js"></script>
 <style>
 	body{
 		padding-top: 50px;
@@ -31,16 +35,9 @@
 </style>
 </head>
 <body>
-<div class="navbar navbar-inverse navbar-fixed-top">
-	<div class="container">
-		<a class="navbar-brand" href="${pageContext.request.contextPath }/index.jsp">Acorn</a>
-		<ul class="nav navbar-nav">
-			<li class="active"><a href="${pageContext.request.contextPath }/member/list.jsp">회원관리</a></li>
-			<li class="active"><a href="${pageContext.request.contextPath }/todo/list.jsp">할 일 관리</a></li>
-			<li><a href="">쇼핑</a></li>
-		</ul>
-	</div>
-</div>
+<jsp:include page="../include/navbar.jsp">
+	<jsp:param value="todo" name="category"/>
+</jsp:include>
 <div class="container">
 	<!-- 현재 페이지의 위치를 좀더 자세히 알려주는 breadcrumb -->
 	<ol class="breadcrumb">

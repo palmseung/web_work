@@ -15,18 +15,14 @@
 <title>/todo/list.jsp</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bootstrap.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/step03_custom.css" />
+<!-- jquery + bootstrap javascript 로딩 -->
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.3.1.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/bootstrap.js"></script>
 </head>
 <body>
-<div class="navbar navbar-inverse navbar-fixed-top">
-	<div class="container">
-		<a class="navbar-brand" href="${pageContext.request.contextPath }/index.jsp">Acorn</a>
-		<ul class="nav navbar-nav">
-			<li><a href="${pageContext.request.contextPath }/member/list.jsp">회원관리</a></li>
-			<li class="active"><a href="${pageContext.request.contextPath }/todo/list.jsp">할 일 목록(todo table)</a></li>
-			<li><a href="">쇼핑</a></li>
-		</ul>
-	</div>
-</div>
+<jsp:include page="../include/navbar.jsp">
+	<jsp:param value="todo" name="category"/>
+</jsp:include>
 <div class="container">
 	<!-- 현재 페이지의 위치를 좀더 자세히 알려주는 breadcrumb -->
 	<ol class="breadcrumb">
@@ -50,8 +46,18 @@
 				<td><%=tmp.getNum() %></td>
 				<td><%=tmp.getContent() %></td>
 				<td><%=tmp.getRegdate() %></td>
-				<td><a href="updateform.jsp?num=<%=tmp.getNum() %>">수정</a></td>
-				<td><a href="javascript:deleteConfirm(<%=tmp.getNum() %>)">삭제</a></td>
+				<td><a href="updateform.jsp?num=<%=tmp.getNum() %>">
+						<!-- 스크린 리더기를 위한 기능 text 제공하기 -->
+						<span class="sr-only">수정하러 가기</span>
+						<span class="glyphicon glyphicon-pencil"></span>
+					</a>
+				</td>
+				<td><a href="javascript:deleteConfirm(<%=tmp.getNum() %>)">
+						<!-- 스크린 리더기를 위한 기능 text 제공하기 -->
+						<span class="sr-only">수정하러 가기</span>
+						<span class="glyphicon glyphicon-pencil"></span>
+					</a>
+				</td>
 			</tr>
 		<%} %>
 		</tbody>
