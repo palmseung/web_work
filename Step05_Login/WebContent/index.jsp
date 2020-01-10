@@ -26,6 +26,10 @@
 		<a href="users/logout.jsp">로그아웃</a>
 	<%} %>
 	<h1>인덱스 페이지입니다.</h1>
+	<ul>
+		<li><a href="shop/buy.jsp?num=1&name=coffee">1번 상품 구입하기</a></li>
+		<li><a href="shop/buy.jsp?num=2&name=sugar">2번 상품 구입하기</a></li>
+	</ul>
 	
 </div>
 </body>
