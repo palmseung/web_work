@@ -11,7 +11,7 @@
 	//request에 특정 키값으로 저장된 data 삭제
 	request.removeAttribute("myName");
 	//session 에 특정 키값으로 저장된 data 삭제
-	session.removeAttribute("yourName");
+	//session.removeAttribute("yourName");
 	
 	//만일 여러 개를 한번에 지우고 싶다면
 	session.invalidate(); // session 초기화
