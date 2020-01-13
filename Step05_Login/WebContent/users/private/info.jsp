@@ -40,6 +40,19 @@
 		</tr>
 	</table>
 	<a href="updateform.jsp">개인정보 수정하기</a>
+	<a href="javascript:deleteConfirm()">회원 탈퇴</a>
 </div>
+<script>
+	function deleteConfirm(){
+		let isDelete=confirm("<%=id %> 님 탈퇴하시겠습니까?");
+		if(isDelete){
+			location.href="delete.jsp";
+		}else{
+			
+		}
+		
+	}
+</script>
+
 </body>
 </html>
