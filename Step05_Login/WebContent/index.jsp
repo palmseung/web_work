@@ -25,8 +25,12 @@
 			<li><a href="users/loginform.jsp">로그인</a></li>
 		</ul>
 	<%}else{ %>
-		<p> <strong><%=id%></strong></p> 님 로그인 중...
-		<a href="users/logout.jsp">로그아웃</a>
+		<p> 
+			<strong>
+				<a href="${pageContext.request.contextPath }/users/private/info.jsp"><%=id%></a>
+			</strong>님 로그인 중...
+			<a href="users/logout.jsp">로그아웃</a>
+		</p> 
 	<%} %>
 	<h1>인덱스 페이지입니다.</h1>
 	<ul>
