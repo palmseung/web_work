@@ -19,6 +19,8 @@ public class UsersDao {
 		return dao;
 	}
 	
+	
+	
 	//회원가입 정보를 삭제하는 메소드
 	public boolean delete(String id) {
 		Connection conn = null;
