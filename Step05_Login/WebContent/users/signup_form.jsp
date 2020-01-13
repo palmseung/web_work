@@ -44,9 +44,12 @@
 			<label for="pwd2">비밀번호 확인</label>
 			<input class="form-control" type="password" id="pwd2" name="pwd2" />
 		</div>
-		<div class="form-group">
-			<label for="email">이메일</label>
+		<div class="form-group has-feedback">
+			<label class="control-label" for="email">이메일</label>
 			<input class="form-control" type="text" id="email" name="email" />
+			<p class="help-block" id="msg_mistype">이메일 형식이 올바르지 않습니다.</p>
+			<span class="glyphicon glyphicon-remove form-control-feedback"></span>
+			<span class="glyphicon glyphicon-ok form-control-feedback"></span>
 		</div>
 		<button type="submit">가입</button>
 		<button type="reset">취소</button>
@@ -58,6 +61,9 @@
 	
 	//비밀번호 동일여부
 	let isSame=false;
+	
+	//이메일 형식 여부
+	let isEmail=false;
 	
 	//아이디를 입력할 때 실행할 함수 등록 (id를 입력할 때마다 ajax로 요청하겠다)
 	$("#id").on("input", function(){
@@ -142,6 +148,52 @@
 					$("#msg_mismatch").show();
 				
 					isMatch=false;
+					
+				}
+			}
+		})
+	});
+	
+	
+	//이메일  입력할 때 실행할 함수 등록 
+	$("#email").on("input", function(){
+		//1. 입력한 이메일을 읽어온다.
+		let inputEmail=$("#email").val();
+
+		
+	
+		//2. 서버에 보내서 일치 여부를 응답 받는다. (ajax 통신)
+		$.ajax({
+			url:"${pageContext.request.contextPath }/users/checkemail.jsp",
+			method: "GET",
+			data: {inputEmail: inputEmail},
+			success: function(responseData){
+				
+				//일단 초기화 시켜놓고
+				$("#email")
+				.parent()
+				.removeClass("has-success has-error")
+				.find(".form-control-feedback") //자손요소중에 클래스가 이런 걸 찾음
+				.hide(); // 찾은 걸 숨겨버려라
+				
+				if(responseData.isEligible){
+					//색상 녹색으로
+					$("#email").parent()
+					.addClass("has-success")
+					.find(".glyphicon-ok")
+					.show();
+					//에러 메시지 안 보이게
+					$("#msg_mistype").hide();
+					isEmail=true;
+					
+				}else{//아닌 경우 (사용가능)
+					$("#email").parent()
+					.addClass("has-error")
+					.find(".glyphicon-remove")
+					.show();
+					//에러메시지 보이게
+					$("#msg_mistype").show();
+					isEmail=false;
 					
 				}
 			}
