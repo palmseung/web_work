@@ -6,6 +6,13 @@
 <meta charset="UTF-8">
 <title>/users/signup_form.jsp</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bootstrap.css" />
+<style>
+	/* 페이지 로딩 시점에 도움말과 피드백 아이콘은 일단 숨기기*/
+	.help-block, .form-control-feedback{
+		display:none;
+	}
+</style>
+
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.3.1.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/bootstrap.js"></script>
 </head>
@@ -13,23 +20,27 @@
 <div class="container">
 	<h1>회원가입 페이지</h1>
 	<form action="signup.jsp" method="post" id="signupForm">
-		<div>
-			<label for="id">아이디</label>
-			<input type="text" id="id" name="id" />
-			<button id="checkBtn">중복확인</button>
-			<span id="checkResult"></span>
+		<!-- 초기 상태 -->
+		<div class="form-group has-feedback">
+			<label class="control-label" for="id">아이디</label>
+			<input class="form-control " type="text" id="id" name="id" />
+			<p class="help-block" id="msg_notuse">사용 불가능한 아이디입니다.</p>
+			<span class="glyphicon glyphicon-remove form-control-feedback"></span>
+			<span class="glyphicon glyphicon-ok form-control-feedback"></span>
 		</div>
-		<div>
+		
+		
+		<div class="form-group">
 			<label for="pwd">비밀번호</label>
-			<input type="password" id="pwd" name="pwd" />
+			<input class="form-control" type="password" id="pwd" name="pwd" />
 		</div>
-		<div>
+		<div class="form-group">
 			<label for="pwd2">비밀번호 확인</label>
-			<input type="password" id="pwd2" name="pwd2" />
+			<input class="form-control" type="password" id="pwd2" name="pwd2" />
 		</div>
-		<div>
+		<div class="form-group">
 			<label for="email">이메일</label>
-			<input type="text" id="email" name="email" />
+			<input class="form-control" type="text" id="email" name="email" />
 		</div>
 		<button type="submit">가입</button>
 		<button type="reset">취소</button>
@@ -39,8 +50,8 @@
 	//아이디 유효성 여부
 	let isIdValid=false;
 	
-	//중복확인 버튼을 눌렀을 때 실행할 함수 등록
-	$("#checkBtn").on("click", function(){
+	//아이디를 입력할 때 실행할 함수 등록 (id를 입력할 때마다 ajax로 요청하겠다)
+	$("#id").on("input", function(){
 		//1. 입력한 아이디를 읽어온다.
 		let inputId=$("#id").val();
 		//2. 서버에 보내서 사용가능 여부를 응답 받는다. (ajax 통신)
@@ -49,21 +60,34 @@
 			method: "GET",
 			data: {inputId:inputId},
 			success: function(responseData){
-				console.log(responseData);
+				
+				//일단 초기화 시켜놓고
+				$("#id")
+				.parent()
+				.removeClass("has-success has-error")
+				.find(".form-control-feedback") //자손요소중에 클래스가 이런 걸 찾음
+				.hide(); // 찾은 걸 숨겨버려라
+				
 				if(responseData.isExist){//아이디가 이미 존재하는 경우 (사용불가)
-					$("#checkResult")
-					.text("사용불가")
-					.css("color", "red");
+					//색상 빨간색으로
+					$("#id").parent()
+					.addClass("has-error")
+					.find(".glyphicon-remove")
+					.show();
+					//에러메시지 보이게
+					$("#msg_notuse").show();
 					isIdValid=false;
+					
 				}else{//아닌 경우 (사용가능)
-					$("#checkResult")
-					.text("사용가능")
-					.css("color", "blue");
+					$("#id").parent()
+					.addClass("has-success")
+					.find(".glyphicon-ok")
+					.show();
+					$("#msg_notuse").hide();
 					isIdValid=true;
 				}
 			}
 		})
-		return false; //폼 전송 막기
 	});
 	
 	//폼에 제출 이벤트가 발생했을 때 실행할 함수 등록
