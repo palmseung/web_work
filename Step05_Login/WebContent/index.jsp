@@ -13,6 +13,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bootstrap.css" />
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.3.1.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/bootstrap.js"></script>
 </head>
 <body>
 <div class="contaienr">
@@ -30,7 +33,7 @@
 		<li><a href="shop/buy.jsp?num=1&name=coffee">1번 상품 구입하기</a></li>
 		<li><a href="shop/buy.jsp?num=2&name=sugar">2번 상품 구입하기</a></li>
 	</ul>
-	
+
 </div>
 </body>
 </html>
