@@ -9,9 +9,7 @@ import test.util.DbcpBean;
 
 public class UsersDao {
 	private static UsersDao dao;
-	
 	private UsersDao() {}
-	
 	public static UsersDao getInstance() {
 		if(dao==null) {
 			dao=new UsersDao();

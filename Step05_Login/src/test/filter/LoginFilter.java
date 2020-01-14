@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 
 
 
-@WebFilter(value = {"/shop/*", "/users/private/*"})
+@WebFilter(value = {"/shop/*", "/users/private/*", "/cafe/private/*"})
 public class LoginFilter implements Filter{
 
 	@Override
