@@ -18,7 +18,7 @@
 <script src="${pageContext.request.contextPath }/resources/js/bootstrap.js"></script>
 </head>
 <body>
-<div class="contaienr">
+<div class="container">
 	<%if(id==null){ %>
 		<ul>
 			<li><a href="users/signup_form.jsp">회원가입</a></li>
