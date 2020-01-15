@@ -54,6 +54,20 @@
 	<div class="contents"><%=dto.getContent() %></div>
 	
 	<a href="list.jsp">목록보기</a>
+	<%
+		//세션 영역의 아이디를 읽어온다. 만일 로그인 하지 않았으면 null이다.
+		String id=(String)session.getAttribute("id");
+	%>
+	
+	<%--
+		글 작성자와 로그인 된 아이디가 같을 때만 기능을 제공해 준다.
+		즉, 본인이 작성한 글만 수정할 수 있도록 하기 위해 
+	--%>	
+	<%if(dto.getWriter().equals(id)){ //id가 null일 수도 있으므로, dto의 메소드를 이용해서 비교해야 함. id의 메소드가 아니라 %>
+		<a href="private/updateform.jsp?num=<%=dto.getNum() %>">수정</a>	
+	<%} %>
+	
+	
 </div>
 </body>
 </html>
