@@ -25,6 +25,14 @@
 <head>
 <meta charset="UTF-8">
 <title>/cafe/detail.jsp</title>
+<style>
+	/* 글 내용을 출력할 부분 */
+	.contents{
+		width: 100%;
+		overflow-y: auto;
+		border: 1px dotted #cecece;
+	}
+</style>
 </head>
 <body>
 <div class="container">
@@ -39,16 +47,12 @@
 			<td><%=dto.getWriter() %></td>
 		</tr>
 		<tr>
-			<th>내용</th>
-			<td>
-			<textarea cols="30" rows="10"><%=dto.getContent() %></textarea>
-			</td>
-		</tr>
-		<tr>
 			<th>등록일</th>
 			<td><%=dto.getRegdate() %></td>
 		</tr>
 	</table>
+	<div class="contents"><%=dto.getContent() %></div>
+	
 	<a href="list.jsp">목록보기</a>
 </div>
 </body>
