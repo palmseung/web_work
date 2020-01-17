@@ -36,7 +36,10 @@ regdate DATE
 );
 
 
-CREATE SEQUENCE borad_file_seq;
+
+
+
+CREATE SEQUENCE board_file_seq;
 
 
 

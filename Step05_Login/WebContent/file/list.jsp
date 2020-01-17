@@ -1,3 +1,4 @@
+<%@page import="test.file.dao.FileDao"%>
 <%@page import="test.file.dto.FileDto"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
@@ -9,7 +10,7 @@
 <%
 	//1.DB 에서 파일 목록을 얻어와서 
 	
-	List<FileDto> list=new ArrayList<FileDto>();
+	List<FileDto> list=FileDao.getInstance().getList();
 	
 	//2.응답
 
