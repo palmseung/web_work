@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<jsp:include page="../../include/resource.jsp"></jsp:include>
 <style>
 	/* textarea 의 크기가 SmartEditor 의 크기가 된다. */
 	#content{
@@ -21,24 +22,29 @@
 	String id=(String)session.getAttribute("id");
 
 %>
-
+<jsp:include page="../../include/navbar.jsp">
+	<jsp:param value="cafe" name="category"/>
+</jsp:include>
 <div class="container">
-	<h1>새 글 작성 양식입니다.</h1>
+	<ol class="breadcrumb">
+		<li><a href="${pageContext.request.contextPath }/list.jsp">목록</a></li>
+		<li>새 글 작성</li>
+	</ol>
 	<form action="insert.jsp" method="post">
-		<div>
+		<div class="form-group">
 			<label for="writer">작성자</label>
-			<input type="text" value="<%=id %>" disabled />
+			<input class="form-control" type="text" value="<%=id %>" disabled />
 		</div>
-		<div>
+		<div class="form-group">
 			<label for="title">제목</label>
-			<input type="text" name="title" id="title" />
+			<input class="form-control" type="text" name="title" id="title" />
 		</div>
-		<div>
+		<div class="form-group">
 			<label for="content">내용</label>
-			<textarea name="content" id="content" cols="30" rows="10"></textarea>
+			<textarea class="form-control" name="content" id="content" cols="30" rows="10"></textarea>
 		</div>		
-		<button type="submit" onclick="submitContents(this);">저장</button>
-		<button type="reset">취소</button>
+		<button class="btn btn-primary" type="submit" onclick="submitContents(this);">저장</button>
+		<button class="btn btn-warning" type="reset">취소</button>
 	</form>
 </div>
 

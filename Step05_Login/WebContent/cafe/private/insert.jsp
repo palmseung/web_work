@@ -25,6 +25,7 @@
 <head>
 <meta charset="UTF-8">
 <title>cafe/private/insert.jsp</title>
+<jsp:include page="../../include/resource.jsp"></jsp:include>
 </head>
 <body>
 <div class="container">
@@ -35,9 +36,9 @@
 		</script>
 	<%}else{%>
 		<h1>Alert</h1>
-		<p>
+		<p class="alert alert-danger">
 			글 정보 저장  실패!
-			<a href="insertform.jsp">다시 작성하기</a>
+			<a class="alert-link" href="insertform.jsp">다시 작성하기</a>
 		</p>	
 	<%} %>
 </div>

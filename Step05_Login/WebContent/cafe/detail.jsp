@@ -25,19 +25,33 @@
 <head>
 <meta charset="UTF-8">
 <title>/cafe/detail.jsp</title>
+<jsp:include page="../include/resource.jsp"></jsp:include>
 <style>
 	/* 글 내용을 출력할 부분 */
-	.contents{
+	.contents, table{
 		width: 100%;
 		overflow-y: auto;
 		border: 1px dotted #cecece;
+		box-shadow: 3px 3px 5px 6px #ccc;
 	}
 </style>
 </head>
 <body>
+<jsp:include page="../include/navbar.jsp">
+	<jsp:param value="cafe" name="category"/>
+</jsp:include>
 <div class="container">
-	<h1>글 상세 페이지</h1>
-	<table>
+	<ol class="breadcrumb">
+		<li><a href="${pageContext.request.contextPath }/list.jsp">목록</a></li>
+		<li>글 상세보기</li>
+	</ol>
+	
+	<table class="table table-bordered table-condensed">
+		<colgroup>
+			<col class="col-xs-4" />
+			<col class="col-xs-8" />
+		</colgroup>
+	
 		<tr>
 			<th>글 번호</th>
 			<td><%=dto.getNum() %></td>
@@ -65,10 +79,20 @@
 	--%>	
 	<%if(dto.getWriter().equals(id)){ //id가 null일 수도 있으므로, dto의 메소드를 이용해서 비교해야 함. id의 메소드가 아니라 %>
 		<a href="private/updateform.jsp?num=<%=dto.getNum() %>">수정</a>	
+		<a href="javascript:deleteConfirm()">삭제</a>
 	<%} %>
 	
 	
 </div>
+<script>
+	function deleteConfirm(){
+		let isDelete=confirm("글을 삭제하시겠습니까?")
+		if(isDelete){
+			location.href="private/delete.jsp?num=<%=dto.getNum() %>";
+		}
+		
+	}
+</script>
 </body>
 </html>
 

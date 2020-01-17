@@ -18,28 +18,32 @@
 <head>
 <meta charset="UTF-8">
 <title>/cafe/private/updateform.jsp</title>
+<jsp:include page="../../include/resource.jsp"></jsp:include>
 </head>
 <body>
+<jsp:include page="../../include/navbar.jsp">
+	<jsp:param value="cafe" name="category"/>
+</jsp:include>
 <div class="container">
 	<h1>글 수정 양식입니다.</h1>
 	<form action="update.jsp" method="post">
 		<input type="hidden" name="num" value="<%=num %>" />
-		<div>
+		<div class="form-group" >
 			<label for="num">글번호</label>
-			<input type="text" id="num" value="<%=num %>" disabled />
+			<input class="form-control"type="text" id="num" value="<%=num %>" disabled />
 		</div>
-		<div>
+		<div class="form-group" >
 			<label for="title">제목</label>
-			<input type="text" id="title" name="title" value="<%=dto.getTitle() %>" />
+			<input class="form-control" type="text" id="title" name="title" value="<%=dto.getTitle() %>" />
 		</div>
-		<div>
+		<div class="form-group" >
 			<label for="content">내용</label>
-			<textarea name="content" id="content" cols="30" rows="10">
+			<textarea class="form-control" name="content" id="content" cols="30" rows="10">
 				<%=dto.getContent() %>
 			</textarea>
 		</div>
-		<button type="submit" onclick="submitContents(this);">수정 확인</button>
-		<button type="reset">취소</button>
+		<button class="btn btn-priamary" type="submit" onclick="submitContents(this);">수정 확인</button>
+		<button class="btn btn-warning" type="reset">취소</button>
 	</form>
 </div>
 <script src="${pageContext.request.contextPath }/SmartEditor/js/HuskyEZCreator.js"></script>
