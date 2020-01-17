@@ -98,6 +98,7 @@
 <title>/file/private/upload.jsp</title>
 <jsp:include page="../../include/resource.jsp"></jsp:include>
 </head>
+
 <body>
 <div class="container">
 	<h1>Alert</h1>
