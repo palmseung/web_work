@@ -30,7 +30,7 @@
 
 <div class="container">
 	<h1>파일 목록입니다.</h1>
-	<table>
+	<table class="table table-striped table-condensed">
 		<thead>
 			<tr>
 				<th>번호</th>
@@ -48,9 +48,14 @@
 				<td><%=tmp.getNum() %></td>
 				<td><%=tmp.getWriter() %></td>
 				<td><%=tmp.getTitle() %></td>
+				<td>
+				<a href="${pageContext.request.contextPath }/file/private/download.jsp?num=<%=tmp.getNum() %>">
+				<%=tmp.getOrgFileName() %>
+				</a>
+				</td>
 				<td><%=tmp.getFileSize() %></td>
-				<td><%=tmp.getOrgFileName() %></td>
-				<td><%=tmp.getFileSize() %></td>
+				<td><%=tmp.getDownCount() %></td>
+				<td><%=tmp.getRegdate() %></td>
 				<td></td>
 			</tr>
 		<%} %>
