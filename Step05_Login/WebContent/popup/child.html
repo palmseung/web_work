@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>/popup/child.html</title>
+</head>
+<body>
+<h3>팝업 페이지입니다.</h3>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+Voluptatem reiciendis explicabo vitae natus placeat nulla tempore 
+dolorem a necessitatibus repellendus fugiat ipsum enim molestias 
+dignissimos commodi molestiae saepe libero quibusdam?</p>
+<input type="text" id="inputAddr"/><br/>
+<a href="javascript:self.close();">닫기</a>
+<script>
+	document.querySelector("#inputAddr")
+	.addEventListener("input", function(){
+		window.opener.document.querySelector("#addr").value
+		=this.value;
+	});
+</script>
+</body>
+</html>
