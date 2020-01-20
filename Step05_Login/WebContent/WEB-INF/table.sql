@@ -1,3 +1,8 @@
+
+CREATE SEQUENCE board_cafe_seq;
+
+CREATE SEQUENCE board_file_seq;
+
 CREATE TABLE users
 (id VARCHAR2(30) PRIMARY KEY,
 pwd VARCHAR2(20) NOT NULL,
@@ -14,7 +19,6 @@ CREATE TABLE board_cafe(
 	regdate DATE
 );
 
-CREATE SEQUENCE board_cafe_seq;
 
 SELECT *
 	(SELECT result1.*, ROWNUM AS rnum
@@ -36,10 +40,14 @@ regdate DATE
 );
 
 
+ALTER TABLE users ADD(profile VARCHAR2(50));
 
 
 
-CREATE SEQUENCE board_file_seq;
+
+
+
+
 
 
 
