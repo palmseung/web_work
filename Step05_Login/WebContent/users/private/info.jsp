@@ -24,7 +24,7 @@
 	}
 	
 	#profileForm{
-		display: none;
+		display:none;
 	}
 </style>
 </head>
@@ -70,10 +70,13 @@
 	<label for="profileImage">프로필 이미지 선택</label>
 	<input type="file" name="profileImage" id="profileImage"
 		accept=".jpg, .jpeg, .png, .JPG, .JPEG"/>
+
 </form>
 <%-- jquery form  플러그인 javascript 로딩 --%>
 <script src="${pageContext.request.contextPath }/resources/js/jquery.form.min.js"></script>
 <script>
+	
+
 	//프로파일 이미지를 클릭하면 
 	$("#profileLink").click(function(){
 		//강제로 <input type="file" /> 을 클릭해서 파일 선택창을 띄우고
@@ -84,6 +87,8 @@
 		//폼을 강제 제출하고 
 		$("#profileForm").submit();
 	});
+	
+	
 	
 	// jquery form 플러그인의 동작을 이용해서 폼이 ajax 로 제출되도록 한다. 
 	$("#profileForm").ajaxForm(function(responseData){
