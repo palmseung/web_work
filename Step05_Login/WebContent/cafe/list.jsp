@@ -1,17 +1,15 @@
 <%@page import="test.cafe.dao.CafeDao"%>
 <%@page import="test.cafe.dto.CafeDto"%>
 <%@page import="java.util.List"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>/cafe/list.jsp</title>
-<jsp:include page="../include/resource.jsp"></jsp:include>
-</head>
-<body>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <%
+//세션에 있는 아이디 읽어오기 (로그인 하지 않았다면 null)
+	String id=(String)session.getAttribute("id");
+
 	//한 페이지에 나타낼 row 의 갯수
 	final int PAGE_ROW_COUNT=5;
 	//하단 디스플레이 페이지 갯수
@@ -52,10 +50,32 @@
 	//1. DB 에서 글 목록을 얻어온다.
 	List<CafeDto> list=CafeDao.getInstance().getList(dto);
 	//2. 글 목록을 응답한다.
+	
+	//3. EL, JSTL 을 활용하기 위해 필요한 모델을 request 에 담는다.
+	request.setAttribute("list", list);
+	request.setAttribute("pageNum", pageNum);
+	request.setAttribute("startPageNum", startPageNum);
+	request.setAttribute("endPageNum", endPageNum);
+	request.setAttribute("totalPageCount", totalPageCount);
+	
+	
 %>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>/cafe/list.jsp</title>
+<jsp:include page="../include/resource.jsp"></jsp:include>
+</head>
+<body>
+
+
+
 <jsp:include page="../include/navbar.jsp">
 	<jsp:param value="cafe" name="category"/>
 </jsp:include>
+
 <div class="container">
 	<ol class="breadcrumb">
 		<li><a href="list.jsp">목록</a></li>
@@ -79,58 +99,24 @@
 			</tr>
 		</thead>
 		<tbody>
-		<%for(CafeDto tmp:list){ %>
+		<c:forEach var="tmp" items="${requestScope.list }">
 			<tr>
-				<td><%=tmp.getNum() %></td>
-				<td><%=tmp.getWriter() %></td>
-				<td>
-					<a href="detail.jsp?num=<%=tmp.getNum() %>">
-						<%=tmp.getTitle() %>
-					</a>
-				</td>
-				<td><%=tmp.getViewCount() %></td>
-				<td><%=tmp.getRegdate() %></td>
+				<td>${tmp.num }</td>
+				<td>${tmp.writer }</td>
+				<td><a href="detail.jsp?num=${tmp.num }">${tmp.title }</a></td>
+				<td>${tmp.viewCount }</td>
+				<td>${tmp.regdate }</td>
 			</tr>
-		<%} %>
+		</c:forEach>
 		</tbody>
 	</table>
 	
 	<a href="private/insertform.jsp">새글 작성</a>
 	
-	<div class="page-display">
-		<ul class="pagination pagination-sm">
-			<%if(startPageNum != 1){ %>
-				<li>
-					<a href="list.jsp?pageNum=<%=startPageNum-1 %>">&laquo;</a>
-				</li>
-			<%}else{ %>
-				<li class="disabled">
-					<a href="javascript:">&laquo;</a>
-				</li>
-			<%} %>
-			<%for(int i=startPageNum; i<=endPageNum; i++){ %>
-				<%if(i == pageNum){ %>
-					<li class="active">
-						<a href="list.jsp?pageNum=<%=i %>"><%=i %></a>
-					</li>
-				<%}else{ %>
-					<li>
-						<a href="list.jsp?pageNum=<%=i %>"><%=i %></a>
-					</li>
-				<%} %>
-			<%} %>
-			<%if(endPageNum < totalPageCount){ %>
-				<li>
-					<a href="list.jsp?pageNum=<%=endPageNum+1 %>">&raquo;</a>
-				</li>
-			<%}else{ %>
-				<li class="disabled">
-					<a href="javascript:">&raquo;</a>
-				</li>
-			<%} %>
-		</ul>
-	</div>
+	<jsp:include page="../include/paging.jsp"/>
+	
 </div>
+
 </body>
 </html>
 

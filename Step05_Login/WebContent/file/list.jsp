@@ -4,8 +4,8 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-    
+     
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     
 <%
 	
@@ -13,7 +13,7 @@
 	String id=(String)session.getAttribute("id");
 	
 	//한 페이지에 나타낼 row 의 갯수
-	final int PAGE_ROW_COUNT=5;
+	final int PAGE_ROW_COUNT=3;
 	//하단 디스플레이 페이지 갯수
 	final int PAGE_DISPLAY_COUNT=5;
 	
@@ -52,6 +52,12 @@
 	
 	//1. DB 에서 글 목록을 얻어온다.
 	List<FileDto> list=FileDao.getInstance().getList(dto);
+	
+	request.setAttribute("list", list);
+	request.setAttribute("pageNum", pageNum);
+	request.setAttribute("startPageNum", startPageNum);
+	request.setAttribute("endPageNum", endPageNum);
+	request.setAttribute("totalPageCount", totalPageCount);
 	//2. 글 목록을 응답한다.
 	
 %>
@@ -59,7 +65,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>/file/list.jsp</title>
 <jsp:include page="../include/resource.jsp"></jsp:include>
 
 </head>
@@ -84,41 +90,31 @@
 			</tr>
 		</thead>
 		<tbody>
-		<%for(FileDto tmp:list){ %>
-			<tr>
-				<td><%=tmp.getNum() %></td>
-				<td><%=tmp.getWriter() %></td>
-				<td><%=tmp.getTitle() %></td>
-				<td>
-					<a href="${pageContext.request.contextPath }/file/private/download.jsp?num=<%=tmp.getNum() %>">
-					<%=tmp.getOrgFileName() %>
-					</a>
-				</td>
-				<td><%=tmp.getFileSize() %></td>
-				<td><%=tmp.getDownCount() %></td>
-				<td><%=tmp.getRegdate() %></td>
-				<td>
-					<%if(tmp.getWriter().equals(id)){ %>
-						<a href="javascript:deleteConfirm(<%=tmp.getNum() %>)">삭제</a>
-					<%} %>
-				</td>
-			</tr>
-		<%} %>
+		
+			<c:forEach var="tmp" items="${requestScope.list }">
+				<tr>
+					<td>${tmp.num }</td>
+					<td>${tmp.writer }</td>
+					<td>${tmp.title }</td>
+					<td>
+						<a href="${pageContext.request.contextPath }/file/private/download.jsp?num=${tmp.num }">
+						</a>
+					</td>
+					<td>${tmp.fileSize }</td>
+					<td>${tmp.downCount }</td>
+					<td>${tmp.regdate }</td>
+					<td>
+						<a href="javascript:deleteConfirm(${tmp.num } %>)">삭제</a>
+					</td>
+				</tr>
+			
+			</c:forEach>
 		</tbody>
 	</table>
 	
 	<a href="${pageContext.request.contextPath }/file/private/upload_form.jsp">파일 업로드</a>
 	
-	
-	
-<jsp:include page="../include/paging.jsp">
-	<jsp:param value="<%=startPageNum %>" name="startPageNum"/>
-	<jsp:param value="<%=endPageNum %>" name="endPageNum"/>
-	<jsp:param value="<%=pageNum %>" name="pageNum"/>
-	<jsp:param value="<%=totalPageCount %>" name="totalPageCount"/>
-</jsp:include>
-	
-	
+	<jsp:include page="../include/paging.jsp"/>
 	
 </div>
 <script>
