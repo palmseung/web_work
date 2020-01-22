@@ -11,7 +11,7 @@
 		<c:choose>
 			<c:when test="${startPageNum ne 1 }">
 				<li>
-				<a href="list.jsp?pageNum=${startPageNum-1 }">&laquo;</a>
+				<a href="list.nhn?pageNum=${startPageNum-1 }">&laquo;</a>
 			</li>	
 			</c:when>
 			<c:otherwise>
@@ -27,12 +27,12 @@
 			<c:choose>
 				<c:when test="${i eq pageNum }">
 					<li class="active">
-						<a href="list.jsp?pageNum=${i }">${i }</a>
+						<a href="list.nhn?pageNum=${i }">${i }</a>
 					</li>
 				</c:when>
 				<c:otherwise>
-					<li>
-						<a href="list.jsp?pageNum=${i }">${i }</a>
+					<li>s
+						<a href="list.nhn?pageNum=${i }">${i }</a>
 					</li>
 				</c:otherwise>
 			</c:choose>
@@ -41,7 +41,7 @@
 		<c:choose>
 			<c:when test="${endPageNum lt totalPageCount }">
 				<li>
-					<a href="list.jsp?pageNum=${endPageNum+1 }">&raquo;</a>
+					<a href="list.nhn?pageNum=${endPageNum+1 }">&raquo;</a>
 				</li>
 			</c:when>
 			<c:otherwise>

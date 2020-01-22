@@ -10,14 +10,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/cafe/list.jsp</title>
-<jsp:include page="../include/resource.jsp"></jsp:include>
+<title>/views/cafe/list.jsp</title>
+<jsp:include page="../../include/resource.jsp"></jsp:include>
 </head>
 <body>
-
-
-
-<jsp:include page="../include/navbar.jsp">
+<jsp:include page="../../include/navbar.jsp">
 	<jsp:param value="cafe" name="category"/>
 </jsp:include>
 
@@ -58,7 +55,8 @@
 	
 	<a href="private/insertform.jsp">새글 작성</a>
 	
-	<jsp:include page="../include/paging.jsp"/>
+	<jsp:include page="../../include/paging.jsp"/>
+	
 	
 </div>
 
