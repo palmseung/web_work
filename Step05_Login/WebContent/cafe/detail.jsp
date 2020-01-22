@@ -4,7 +4,7 @@
 <%@page import="test.cafe.dto.CafeDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
 	//1.GET 방식 파라미터로 전달되는 글 번호를 읽어온다.
 	int num=Integer.parseInt(request.getParameter("num"));
@@ -18,6 +18,11 @@
 	
 	//4.글 정보를 응답한다.
 
+	
+	//EL로 읽어낼 모델을 dto라는 키값으로 CafeDto 객체를 담는다.
+	request.setAttribute("dto", dto);
+	
+	
 %>
 
 <!DOCTYPE html>
@@ -54,18 +59,18 @@
 	
 		<tr>
 			<th>글 번호</th>
-			<td><%=dto.getNum() %></td>
+			<td>${dto.num }</td>
 		</tr>
 		<tr>
 			<th>작성자</th>
-			<td><%=dto.getWriter() %></td>
+			<td>${dto.writer }</td>
 		</tr>
 		<tr>
 			<th>등록일</th>
-			<td><%=dto.getRegdate() %></td>
+			<td>${dto.writer }</td>
 		</tr>
 	</table>
-	<div class="contents"><%=dto.getContent() %></div>
+	<div class="contents">${dto.content }</div>
 	
 	<a href="list.jsp">목록보기</a>
 	<%
@@ -77,18 +82,17 @@
 		글 작성자와 로그인 된 아이디가 같을 때만 기능을 제공해 준다.
 		즉, 본인이 작성한 글만 수정할 수 있도록 하기 위해 
 	--%>	
-	<%if(dto.getWriter().equals(id)){ //id가 null일 수도 있으므로, dto의 메소드를 이용해서 비교해야 함. id의 메소드가 아니라 %>
-		<a href="private/updateform.jsp?num=<%=dto.getNum() %>">수정</a>	
+	<c:if test="${dto.writer eq sessionScope.id }">
+		<a href="private/updateform.jsp?num=${dto.num }">수정</a>	
 		<a href="javascript:deleteConfirm()">삭제</a>
-	<%} %>
-	
-	
+	</c:if>
+
 </div>
 <script>
 	function deleteConfirm(){
 		let isDelete=confirm("글을 삭제하시겠습니까?")
 		if(isDelete){
-			location.href="private/delete.jsp?num=<%=dto.getNum() %>";
+			location.href="private/delete.jsp?num=${dto.num }";
 		}
 		
 	}
