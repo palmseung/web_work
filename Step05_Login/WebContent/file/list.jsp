@@ -6,6 +6,7 @@
     pageEncoding="UTF-8"%>
      
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
     
 <%
 	
@@ -100,7 +101,7 @@
 						<a href="${pageContext.request.contextPath }/file/private/download.jsp?num=${tmp.num }">
 						</a>
 					</td>
-					<td>${tmp.fileSize }</td>
+					<td><fmt:formatNumber value="${tmp.fileSize }"/> bytes</td>
 					<td>${tmp.downCount }</td>
 					<td>${tmp.regdate }</td>
 					<td>
